@@ -1,0 +1,6 @@
+{
+  "firestore": {
+    "rules": "patient-management-app/firebase/firestore.rules",
+    "indexes": "patient-management-app/firebase/firestore.indexes.json"
+  }
+}

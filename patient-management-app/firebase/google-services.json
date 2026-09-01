@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "882477605750",
+    "firebase_url": "https://manegment-ecb77-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "manegment-ecb77",
+    "storage_bucket": "manegment-ecb77.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882477605750:android:9f94a1c665f1a3c1cf9057",
+        "android_client_info": {
+          "package_name": "management.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDogy1lV1Nol69pZXbWB4gxqtAmLcT7xD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

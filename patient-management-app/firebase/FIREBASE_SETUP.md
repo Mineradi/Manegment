@@ -15,12 +15,14 @@ from platform files, not from `.env`:
 
 ## 2. Register your apps
 
-- **Android**: add the Android app with package `com.clinic.patientmanager`
-  (match `app.json`). Download `google-services.json` into
+- **Android**: add the Android app with package **`management.com`** (this must
+  match `app.json` -> android.package and the `package_name` in
+  `google-services.json`). The file is already placed at
   `patient-management-app/firebase/google-services.json`.
-- **iOS**: add the iOS app with bundle ID `com.clinic.patientmanager`.
+- **iOS (optional)**: add the iOS app with bundle ID `com.clinic.patientmanager`.
   Download `GoogleService-Info.plist` into
-  `patient-management-app/firebase/GoogleService-Info.plist`.
+  `patient-management-app/firebase/GoogleService-Info.plist` and re-add
+  `"googleServicesFile": "./firebase/GoogleService-Info.plist"` under `app.json` -> ios.
 
 ## 3. Deploy rules and indexes
 

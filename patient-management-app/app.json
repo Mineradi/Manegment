@@ -12,11 +12,10 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.clinic.patientmanager",
-      "googleServicesFile": "./firebase/GoogleService-Info.plist"
+      "bundleIdentifier": "com.clinic.patientmanager"
     },
     "android": {
-      "package": "com.clinic.patientmanager",
+      "package": "management.com",
       "googleServicesFile": "./firebase/google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#0F766E"
@@ -28,12 +27,12 @@
     ],
     "extra": {
       "firebase": {
-        "apiKey": "REPLACE_ME",
-        "authDomain": "REPLACE_ME.firebaseapp.com",
-        "projectId": "REPLACE_ME",
-        "storageBucket": "REPLACE_ME.appspot.com",
-        "messagingSenderId": "REPLACE_ME",
-        "appId": "REPLACE_ME"
+        "apiKey": "AIzaSyDogy1lV1Nol69pZXbWB4gxqtAmLcT7xD8",
+        "authDomain": "manegment-ecb77.firebaseapp.com",
+        "projectId": "manegment-ecb77",
+        "storageBucket": "manegment-ecb77.firebasestorage.app",
+        "messagingSenderId": "882477605750",
+        "appId": "1:882477605750:android:9f94a1c665f1a3c1cf9057"
       }
     }
   }

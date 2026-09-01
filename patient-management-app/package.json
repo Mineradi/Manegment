@@ -10,7 +10,8 @@
     "prebuild": "expo prebuild",
     "typecheck": "tsc --noEmit",
     "seed": "ts-node scripts/seedDemo.ts",
-    "setup:seed": "firebase emulators:start --only firestore"
+    "deploy:firestore": "firebase deploy --only firestore:rules,firestore:indexes",
+    "emulate": "firebase emulators:start --only firestore"
   },
   "dependencies": {
     "@react-native-firebase/app": "^21.8.1",

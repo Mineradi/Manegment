@@ -24,3 +24,6 @@ yarn-error.log*
 # Firebase service account keys / generated config
 *.json.secret
 serviceAccount*.json
+
+# Firebase CLI local login token
+firebase/deployTokens.json

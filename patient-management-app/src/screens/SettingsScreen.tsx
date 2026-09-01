@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { useClinicStore } from '../store/ClinicStore';
-import { signOut } from '../firebase/auth';
 import { exportPatientsCsv, exportCurrentMonthVisits } from '../services/exportService';
 import { colors, spacing } from '../theme/theme';
 import { Card, LargeButton, Screen, SectionTitle } from '../components/ui';
@@ -29,22 +28,16 @@ export function SettingsScreen(_props: Props) {
     }
   };
 
-  const confirmSignOut = () => {
-    Alert.alert('Sign out?', 'Your data stays safely in Firebase.', [
-      { text: 'Cancel', style: 'cancel' },
-      { text: 'Sign Out', style: 'destructive', onPress: () => signOut() },
-    ]);
-  };
-
   return (
     <Screen>
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <SectionTitle>Data & Sync</SectionTitle>
         <Card>
           <Text style={styles.info}>
-            Offline persistence is enabled automatically. Any patient or visit
-            you add while offline is stored on this phone and syncs to Firebase
-            when the connection returns.
+            All patient and visit data lives in Cloud Firestore. Firebase offline
+            persistence keeps a temporary copy on this phone so you can work with
+            no internet — every change is written to Firebase automatically when
+            the connection returns.
           </Text>
           <LargeButton
             title="Sync Now"
@@ -72,11 +65,6 @@ export function SettingsScreen(_props: Props) {
           <Text style={styles.hint}>
             CSV opens in Excel / Google Sheets / Numbers. For a PDF, export the CSV and print it.
           </Text>
-        </Card>
-
-        <SectionTitle>Account</SectionTitle>
-        <Card>
-          <LargeButton title="Sign Out" variant="danger" onPress={confirmSignOut} />
         </Card>
       </ScrollView>
     </Screen>

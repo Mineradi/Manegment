@@ -1,45 +1,42 @@
 rules_version = '2';
 
 // Clinic Patient Manager — Firestore security rules.
-// Authenticated staff (doctor / receptionist) can read all records and write
-// only when not cross-collection spoofing. Deploys with:
-//   firebase deploy --only firestore:rules
+//
+// This app intentionally has NO authentication / login screen. The app opens
+// straight into the patient dashboard and writes directly to Cloud Firestore.
+//
+// IMPORTANT: because there is no user sign-in, access below is open to anyone
+// who has the app. For a production clinic that stores patient data, enable
+// Firebase App Check (https://firebase.google.com/docs/app-check) and require
+// it in these rules to keep the database private to your own installs.
+//   Firebase console > All products > App Check > register the Android app,
+//   then uncomment the `check()` block below.
+//
+// Deploy with:  firebase deploy --only firestore:rules
 
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function signedIn() {
-      return request.auth != null;
+    // Optional App Check: require a verified app install (unauthenticated app).
+    function appVerified() {
+      return request.app != null && request.app.verify();
     }
 
-    // Optional: restrict to a single staff account or a list of allowed emails.
-    // function allowedStaff() {
-    //   return request.auth.token.email in ['doctor@clinic.com'];
-    // }
-
     match /patients/{patientId} {
-      allow read: if signedIn();
-      allow create: if signedIn()
-        && request.resource.data.id == patientId
-        && request.resource.data.name is string
-        && request.resource.data.name.size() > 0
-        && request.resource.data.village is string
-        && request.resource.data.village.size() > 0;
-      allow update, delete: if signedIn();
+      allow read, write: if true;
+      // Uncomment to lock down to App Check verified installs instead:
+      // allow read, write: if appVerified();
     }
 
     match /visits/{visitId} {
-      allow read: if signedIn();
-      allow create: if signedIn()
-        && request.resource.data.patientId is string
-        && request.resource.data.issue is string
-        && request.resource.data.issue.size() > 0;
-      allow update, delete: if signedIn();
+      allow read, write: if true;
+      // allow read, write: if appVerified();
     }
 
     // Counter document for sequential patient IDs.
     match /meta/{docId} {
-      allow read, write: if signedIn();
+      allow read, write: if true;
+      // allow read, write: if appVerified();
     }
   }
 }

@@ -2,12 +2,17 @@ import firestore from '@react-native-firebase/firestore';
 import { Patient, Visit } from '../types/models';
 
 /**
- * Offline support
- * ----------------
- * @react-native-firebase/firestore keeps a local persistent cache on the device
- * by default. Every read below uses onSnapshot (real-time) so the UI reflects
- * the cache instantly while offline, and writes are queued and synced
- * automatically when connectivity returns. We never disable persistence.
+ * No-auth, Firebase-only data layer
+ * ---------------------------------
+ * There is no login screen and no Firebase Auth. The app opens straight into
+ * the dashboard and reads/writes directly to Cloud Firestore.
+ *
+ * Offline: @react-native-firebase/firestore keeps a local persistent cache on
+ * the device by default. Every read below uses onSnapshot (real-time) so the UI
+ * reflects the cache instantly while offline, and writes are queued and synced
+ * automatically when connectivity returns. Firebase remains the source of
+ * truth — this local cache is Firestore's own feature, not a separate local
+ * database. We never disable persistence.
  */
 
 export const db = firestore();

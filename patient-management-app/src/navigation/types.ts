@@ -1,7 +1,10 @@
 import { Patient } from '../types/models';
 
+/**
+ * No authentication: the app opens directly into the patient dashboard.
+ * The only navigation destinations are the clinic-management screens.
+ */
 export type RootStackParamList = {
-  Login: undefined;
   Home: undefined;
   AddPatient: { prefillVillage?: string } | undefined;
   PatientProfile: { patientId: string };

@@ -37,8 +37,3 @@ export type VisitInput = Omit<
   Visit,
   'id' | 'patientId' | 'date' | 'createdAt'
 >;
-
-export interface AuthUser {
-  uid: string;
-  email: string | null;
-}

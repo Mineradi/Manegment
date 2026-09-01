@@ -20,11 +20,16 @@ export function watchPatientVisits(
   cb: (visits: Visit[]) => void,
   onError?: (e: Error) => void
 ): () => void {
+  // Query only on patientId; sort in memory. This avoids needing a composite
+  // Firestore index, so the app works out of the box right after rules deploy.
   return REF()
     .where('patientId', '==', patientId)
-    .orderBy('date', 'desc')
     .onSnapshot(
-      (snapshot) => cb(snapshot.docs.map(visitFromDoc)),
+      (snapshot) => {
+        const list = snapshot.docs.map(visitFromDoc);
+        list.sort((a, b) => b.date.getTime() - a.date.getTime());
+        cb(list);
+      },
       (error) => onError?.(error)
     );
 }

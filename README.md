@@ -75,8 +75,10 @@ npx expo start
 ```
 
 Then follow `patient-management-app/firebase/FIREBASE_SETUP.md` to enable
-**Cloud Firestore** in your Firebase project and deploy the rules/indexes.
-Your `google-services.json` is already in place.
+**Cloud Firestore** and publish the security rules. You can do this entirely
+from the Firebase website — **no terminal command is required** (the setup doc
+also lists the CLI option if you prefer it). Your `google-services.json` is
+already in place.
 
 > Expo Go supports the JS portion of the app but **@react-native-firebase
 > needs a development build**. After configuring Firebase run:

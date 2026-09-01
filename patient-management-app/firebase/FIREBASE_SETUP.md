@@ -27,18 +27,28 @@ writes straight to Firestore.
   `"googleServicesFile": "./firebase/GoogleService-Info.plist"` under
   `app.json` → `ios`.
 
-## 4. Deploy rules and indexes
+## 4. Publish the security rules (no terminal needed)
 
-```bash
-cd patient-management-app
-npm i -g firebase-tools
-firebase init firestore   # only if not already initialised in the repo root
-firebase deploy --only firestore:rules,firestore:indexes
-```
+The app has **no login**, so the simplest way to unlock a brand-new Firestore is
+to paste our rules from the Firebase website:
 
-Rules are in `firebase/firestore.rules`; composite indexes in
-`firebase/firestore.indexes.json`. The repo root `firebase.json` already points
-at those files.
+1. Open https://console.firebase.google.com/project/manegment-ecb77/firestore
+2. Click the **Rules** tab (next to "Data").
+3. Select everything in the editor and replace it with the contents of
+   `firebase/firestore.rules` (in this repo).
+4. Click **Publish**.
+
+The app uses only built-in single-field indexes, so **no custom indexes are
+needed** — you do not need to deploy `firestore.indexes.json` for the app to
+work.
+
+> Want to use the CLI instead? From the repo root:
+>
+> ```bash
+> npm install -g firebase-tools
+> firebase login
+> firebase deploy --only firestore:rules
+> ```
 
 ## 5. Run the app
 

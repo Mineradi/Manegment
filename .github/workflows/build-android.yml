@@ -1,0 +1,56 @@
+name: Build Android APK
+# Builds an installable Android APK right on GitHub whenever you push code.
+# You do NOT need Android Studio, Java, or an Android SDK on your own computer.
+#
+# To trigger manually: Repository > Actions > "Build Android APK" > Run workflow.
+# The finished APK is attached under that run as a downloadable artifact.
+on:
+  push:
+    branches:
+      - main
+      - arena/01a05e60-manegment
+    paths:
+      - "patient-management-app/**"
+      - ".github/workflows/build-android.yml"
+  workflow_dispatch:
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: patient-management-app
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: patient-management-app/package-lock.json
+      - name: Set up Java (JDK 17 for React Native/Expo)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install dependencies
+        run: npm install
+      - name: Prebuild Android project (generates android/ and copies Firebase config)
+        run: npx expo prebuild --platform android --no-install
+      - name: Install latest Android SDK pieces required by Expo SDK 53
+        working-directory: android
+        run: |
+          export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" > /dev/null || true
+      - name: Build release APK
+        working-directory: android
+        run: ./gradlew assembleRelease
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: clinic-patient-manager-apk
+          path: android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+

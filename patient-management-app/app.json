@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Clinic Patient Manager",
+    "slug": "clinic-patient-manager",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#0F766E"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.clinic.patientmanager",
+      "googleServicesFile": "./firebase/GoogleService-Info.plist"
+    },
+    "android": {
+      "package": "com.clinic.patientmanager",
+      "googleServicesFile": "./firebase/google-services.json",
+      "adaptiveIcon": {
+        "backgroundColor": "#0F766E"
+      },
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"]
+    },
+    "plugins": [
+      ["@react-native-firebase/app", { "ios": true, "android": true }]
+    ],
+    "extra": {
+      "firebase": {
+        "apiKey": "REPLACE_ME",
+        "authDomain": "REPLACE_ME.firebaseapp.com",
+        "projectId": "REPLACE_ME",
+        "storageBucket": "REPLACE_ME.appspot.com",
+        "messagingSenderId": "REPLACE_ME",
+        "appId": "REPLACE_ME"
+      }
+    }
+  }
+}

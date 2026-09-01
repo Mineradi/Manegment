@@ -25,10 +25,6 @@ jobs:
           cache: npm
           cache-dependency-path: patient-management-app/package-lock.json
 
-      - name: Install expo-system-ui (used by the app config)
-        working-directory: patient-management-app
-        run: npx expo install expo-system-ui
-
       - name: Set up Java (JDK 17 for React Native/Expo)
         uses: actions/setup-java@v4
         with:
@@ -38,6 +34,10 @@ jobs:
       - name: Install dependencies
         working-directory: patient-management-app
         run: npm install
+
+      - name: Install expo-system-ui (removes userInterfaceStyle warning)
+        working-directory: patient-management-app
+        run: npx expo install expo-system-ui
 
       - name: Prebuild Android project (generates android/ and copies Firebase config)
         working-directory: patient-management-app
